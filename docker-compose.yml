@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+    webapi:
+        build: webapi/.
+        ports:
+            - "8001:80"
+
+    storageservice:
+        build: webapi/.
+        ports:
+            - "8002:80"
