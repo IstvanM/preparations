@@ -9,4 +9,6 @@ def get_config(section: str, conf: str):
         env='dev'
     config = configparser.ConfigParser()
     config.read(f'config/{env}.ini')
-    return config[section][conf]
+    res = config[section][conf]
+    print(f'{env}: {section}/{conf}={res}')
+    return res
