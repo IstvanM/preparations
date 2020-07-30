@@ -3,10 +3,19 @@ version: '3'
 services:
     storageservice:
         build: storageservice/.
+        environment: 
+            - upload_path=/tmp/storage 
         ports:
             - "8001:8001"
         volumes:
             - storage:/tmp/storage/:rw
+        
+    redis:
+        image: redis:6.0-alpine
+        ports: 6379:6379
+        volumes:
+            - redis_data:/data
 
 volumes:
     storage:
+    redis_data:

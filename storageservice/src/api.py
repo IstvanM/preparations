@@ -1,10 +1,15 @@
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
-from config import get_config
+from redis import Redis
+from rq import Queue
 import os
 
+redis = Redis(host='localhost', port=6379, db=0)
+queue = Queue(connection=redis)
+
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = get_config('storage','upload_path')
+app.config['UPLOAD_FOLDER'] = os.getenv('upload_path','/tmp/storage/')
+
 
 @app.route('/')
 def health_check():
